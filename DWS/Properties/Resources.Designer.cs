@@ -71,7 +71,7 @@ namespace DWS_Lite.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 13-Sep-15 21:48:30.83 
+        ///   Looks up a localized string similar to 29-Oct-15 20:55:48.73 
         ///.
         /// </summary>
         internal static string build_datatime {
@@ -81,11 +81,51 @@ namespace DWS_Lite.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 401.
+        ///   Looks up a localized string similar to 600.
         /// </summary>
         internal static string build_number {
             get {
                 return ResourceManager.GetString("build_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap close {
+            get {
+                object obj = ResourceManager.GetObject("close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap donatebtn {
+            get {
+                object obj = ResourceManager.GetObject("donatebtn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap minimize {
+            get {
+                object obj = ResourceManager.GetObject("minimize", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap warning {
+            get {
+                object obj = ResourceManager.GetObject("warning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

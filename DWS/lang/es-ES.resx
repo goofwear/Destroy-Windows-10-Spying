@@ -204,9 +204,6 @@ Un reinicio es necesario para deshabilitar todo el spyware. Reiniciar ahora?</va
     <value>Requiere un reinicio.
 ¿Reiniciar ahora?</value>
   </data>
-  <data name="RunOnlyWin10" xml:space="preserve">
-    <value>Esta aplicación solo funciona en Windows 10</value>
-  </data>
   <data name="tabPageAbout" xml:space="preserve">
     <value>Acerca de</value>
   </data>
@@ -245,5 +242,8 @@ Arguments for the command line:
 /deleteapp= - allows you to delete an application Metro in Windows. Example: /deleteapp=bing or /deleteapp=note
 /destroy - an argument for removing spyware.
 IMPORTANT! Arguments /destroy and /deleteapp= can not be combined, and the argument /deleteapp= can not be used several times.</value>
+  </data>
+  <data name="FindOffice16FileT" xml:space="preserve">
+    <value>Please specify the path to the file msosync.exe. If Office 2016 is installed as standard on the drive C, press "Cancel"</value>
   </data>
 </root>

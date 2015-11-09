@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,146 +118,144 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnDeleteAllWindows10Apps" xml:space="preserve">
-    <value>Supprimer toutes les applications Metro de Windows 10</value>
+    <value>Verwijder alle Metro apps (win10)</value>
   </data>
   <data name="btnDeleteOneDrive" xml:space="preserve">
-    <value>Supprimer OneDrive</value>
+    <value>Verwijder OneDrive</value>
   </data>
   <data name="btnOpenAndEditHosts" xml:space="preserve">
-    <value>Ouvrir et Modifier le fichier HOSTS</value>
+    <value>Open en bewerk het HOSTS bestand</value>
   </data>
   <data name="btnProfessionalMode" xml:space="preserve">
-    <value>Activer le Mode Professionnel</value>
+    <value>Schakel de Proffesional Modus in</value>
   </data>
   <data name="btnRestoreSystem" xml:space="preserve">
-    <value>Restaurer le Système</value>
+    <value>Herstel Systeem</value>
   </data>
   <data name="checkBoxAddToHosts" xml:space="preserve">
-    <value>Ajouter des domaines espion au fichier HOSTS
-    et bloquer les IP dans le pare-feu Windows</value>
+    <value>Voeg spionage domeinen aan het Hosts bestand toe, en blokkeer in Windows Firewall</value>
   </data>
   <data name="checkBoxCreateSystemRestorePoint" xml:space="preserve">
-    <value>Créer un point de restauration système</value>
+    <value>Maak een herstelpunt aan.</value>
   </data>
   <data name="checkBoxDeleteWindows10Apps" xml:space="preserve">
-    <value>Supprimer les applications Métro de Windows 10</value>
+    <value>Verwijder Windows 10 Metro Apps</value>
   </data>
   <data name="checkBoxDisablePrivateSettings" xml:space="preserve">
-    <value>Désactiver les paramètres privés</value>
+    <value>Schakel privacy instellingen uit</value>
   </data>
   <data name="checkBoxDisableWindowsDefender" xml:space="preserve">
-    <value>Désactiver Windows Defender</value>
+    <value>Schakel Windows Defender uit</value>
   </data>
   <data name="checkBoxKeyLoggerAndTelemetry" xml:space="preserve">
-    <value>Supprimer le KeyLogger et la Télémétrie</value>
+    <value>Verwijder de Keylogger, en schakel Telematrie uit</value>
   </data>
   <data name="checkBoxSetDefaultPhoto" xml:space="preserve">
-    <value>Mettre la Visionneuse de photos Windows par défaut</value>
+    <value>Zet de standaard Windows Photo viewer</value>
   </data>
   <data name="checkBoxSPYTasks" xml:space="preserve">
-    <value>Désactiver les tâches de l'Espion</value>
+    <value>Schakel spionage services en taken uit</value>
   </data>
   <data name="Complete" xml:space="preserve">
-    <value>Fini</value>
+    <value>Voltooit!</value>
   </data>
   <data name="CompleteMSG" xml:space="preserve">
-    <value>Fini!
-Un redémarrage est nécessaire pour désactiver tous les logiciels espions.
-Redémarrer maintenant ?</value>
+    <value>Voltooit!
+Opnieuw upstarten is verijst om alle spyware uit te kunnen schakelen.
+Nu opnieuw opstarten?</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>Verwijder</value>
   </data>
   <data name="DeleteApps" xml:space="preserve">
-    <value>Supprimer les applications</value>
+    <value>Verwijder</value>
   </data>
   <data name="Disable" xml:space="preserve">
-    <value>Désactiver</value>
+    <value>Uitschakelen</value>
   </data>
   <data name="Enable" xml:space="preserve">
-    <value>Activer</value>
+    <value>Inschakelen</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Erreur</value>
+    <value>Fout!</value>
   </data>
   <data name="ErrorMSG" xml:space="preserve">
-    <value>Fini avec des erreurs - {0}
-Un redémarrage est nécessaire pour désactiver les logiciels espions.
-Redémarrer maintenant ?</value>
+    <value>Voltooit! Fouten - {0}
+Opnieuw upstarten is verijst om alle spyware uit te kunnen schakelen.
+Nu opnieuw opstarten?</value>
   </data>
   <data name="Info" xml:space="preserve">
     <value>Info</value>
   </data>
   <data name="labelInfoDeleteMetroApps" xml:space="preserve">
-    <value>Les applications Metro seront définitivement supprimées,
-    sans possibilité de les réinstaller.</value>
+    <value>Metro apps worden permanent verwijderd, herstel is niet mogelijk.</value>
   </data>
   <data name="Links" xml:space="preserve">
-    <value>Liens</value>
+    <value>Links</value>
   </data>
   <data name="PressOkAndWait15" xml:space="preserve">
-    <value>Appuyez sur OK et attendez 15 minutes.</value>
+    <value>Druk op OK en wacht 15 minuten</value>
   </data>
   <data name="Question" xml:space="preserve">
-    <value>Question</value>
+    <value>Vraag</value>
   </data>
   <data name="Really" xml:space="preserve">
-    <value>Vraiment ?</value>
+    <value>Zeker?</value>
   </data>
   <data name="Restart" xml:space="preserve">
-    <value>Nécessite un redémarrage.
-Redémarrer maintenant ?</value>
+    <value>Opnieuw opstarten verijst.
+Nu opnieuw opstarten?</value>
   </data>
   <data name="tabPageAbout" xml:space="preserve">
-    <value>À propos</value>
+    <value>Over</value>
   </data>
   <data name="tabPageMain" xml:space="preserve">
-    <value>Principal</value>
+    <value>Start</value>
   </data>
   <data name="tabPageReadMe" xml:space="preserve">
-    <value>Lisez Moi</value>
+    <value>ReadME</value>
   </data>
   <data name="tabPageSettings" xml:space="preserve">
-    <value>Paramètres</value>
+    <value>Instellingen</value>
   </data>
   <data name="tabPageUtilites" xml:space="preserve">
-    <value>Utilitaires</value>
+    <value>Extra functies</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>Attention</value>
-  </data>
-  <data name="DestroyWindowsSpying" xml:space="preserve">
-    <value>Détruire les Espions de Windows 10</value>
+    <value>Waarschuwing!</value>
   </data>
   <data name="RemoveAllOldFirewallRules" xml:space="preserve">
-    <value>Enlever les anciennes règles DWS
-    du pare-feu Windows</value>
+    <value>Verwijder oude DWS instellingen (firewall)</value>
   </data>
   <data name="ReportABug" xml:space="preserve">
-    <value>Signaler un bug</value>
+    <value>Rapporteer een fout.</value>
   </data>
   <data name="ReadMeTextBox" xml:space="preserve">
-    <value>Ce logiciel supprime les espions de Windows 7/8/8.1/10.
-Le logiciel est open source, son code source est disponible sur GitHub.
-Ce logiciel supprime tout l'espionnage de Windows. Il enlève pas mal d'éléments dont la télémétrie et en désactive d'autres, par exemple il désactive Windows Defender, Cortana, et plus encore. Comme le logiciel désactive Windows Update il vous permet de ne plus envoyer de données et de ne plus avoir les nouveaux spyware de Windows.
-La suppression des applications Metro est très bien, parce qu'elles fonctionnent en tâche de fond, et elles consomment pas mal de RAM, et de plus quelques une vous espionnent.
-En plus, le logiciel bloque pas mal d'adresse IP de chez Microsoft, qui reçoivent ces données, et il ajoute la plus part des domaines utilisés dans le fichier Hosts.
-Par contre ce que fait le logiciel est irréversible, les modifications ne peuvent être annulées que via un point de restauration système.
-Pour le moment c'est le logiciel le plus efficace. Le logiciel est développé et amélioré par une large communauté d'utilisateur de Windows 10, certain aide à réécrire le code pour améliorer son efficacité, d'autre l'aide en le traduisant en de nombreuse langue.
+    <value>Dit Programma verwijderd de ingebouwde spyware in Windows 7, 8, 8.1, Server 2008-2012 R2 en 10.
+Het programma is Open-Source, de broncode is te vinden op Github.
+Dit programma verwijderd alle spyware die is ingebouwd door Microsoft in Windows. Sommige Elementen van telematrie worden verwijderd, en de andere worden uitgeschakeld.
+Het programma kan Windows Update uitschakelen, hierdoor blijf je annoniem omdat je geen nieuwe updates ontvangt van spyware.
+De verwijder Metro apps functie werkt zeer goed, Metro apps draaien in de achtergrond en nemen geheugen in beslag. Sommige apps bespioneren je.
+Veel IP adressen van Microsoft worden geblokkeerd, waar data naartoe gaat. De meeste spyware wordt in het HOSTS bestand en Windows Firewall geblokkeerd. 
+het meest van dit programma kan niet teruggedraait worden, zelfts niet na een windows herstel doormiddel van een herstelpunt.
+Op het moment is dit het meest effectieve programma, in het verwijderen van ingebouwde spyware in Windows 10.
+Het programma ontwikkeld en verbeterd een grote gemeenschap aan Windows 10 gebruikers. Sommigen helpen met het herschrijven van de code in een betere wijze, en sommigen helpen met het vertalen van het programma in andere talen.
 
-Voici les arguments utilisables en ligne de commande :
-/lang= - Modifier la langue utilisé par le logiciel à son lancement. Exemple: /lang=fr
-/deleteapp= - Permet la suppression d'une application Metro. Exemple: /deleteapp=bing ou /deleteapp=note
-/destroy - L'argument permettant la suppression des Spyware.
-ATTENTION! Les arguments /destroy et /deleteapp= ne peuvent pas être utilisé en même temps, et l'argument /deleteapp= ne peut pas être utilisé plusieurs fois.</value>
+argumenten voor de opdrachtpromt:
+
+/lang= - zet de taal waarin het programma start. Voorbeeld: /lang=nl
+/deleteapp= - verwijderd een Metro app in windows. Voorbeeld: /deleteapp=bing of /deleteapp=note
+/destroy - verwijderd spyware.
+BELANGRIJK! De argumenten /destroy en /deleteapp= kunnen niet worden gecombineerd, en het argument /deleteapp= kan niet meerdere keren gebruikt worden.</value>
   </data>
   <data name="FindOffice16FileT" xml:space="preserve">
-    <value>Merci de spécifier le chemin du fichier msosync.exe. Si Office 2016 est installé avec son chemin par défaut sur C:, appuez sur "Annuler"</value>
+    <value>wat is het pad naar het bestand "MSOSYNC.EXE". Als Microsoft Office 2016 is geïnstalleerd als standaard op schijf C:\, kies "Annuleren".</value>
   </data>
-    <data name="checkBoxDeleteGWX" xml:space="preserve">
-    <value>Enlever le GWX</value>
+  <data name="checkBoxDeleteGWX" xml:space="preserve">
+    <value>
+Verwijder GWX</value>
   </data>
   <data name="checkBoxDeleteWindows78Updates" xml:space="preserve">
-    <value>Supprimer les mises à jour espionnes.</value>
+    <value>Verwijder spionage updates</value>
   </data>
 </root>

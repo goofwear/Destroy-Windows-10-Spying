@@ -206,9 +206,6 @@
     <value>Требуется перезагрузка
 Перезагрузить сейчас?</value>
   </data>
-  <data name="RunOnlyWin10" xml:space="preserve">
-    <value>Данная программа работает только под Windows 10</value>
-  </data>
   <data name="tabPageAbout" xml:space="preserve">
     <value>О программе</value>
   </data>
@@ -249,5 +246,14 @@
 ВАЖНО! Аргументы /destroy и /deleteapp= нельзя комбинировать между собой, и аргумент /deleteapp= нельзя использовать несколько раз.
 	
 </value>
+  </data>
+  <data name="FindOffice16FileT" xml:space="preserve">
+    <value>Пожалуйста, укажите путь до файла msosync.exe . Если Office 2016 установлен стандартно на диск C, то нажмите "Отмена"</value>
+  </data>
+  <data name="checkBoxDeleteGWX" xml:space="preserve">
+    <value>Удалить GWX (Получить Windows 10)</value>
+  </data>
+  <data name="checkBoxDeleteWindows78Updates" xml:space="preserve">
+    <value>Удалить шпионские обновления.</value>
   </data>
 </root>

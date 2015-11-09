@@ -8,15 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Resources;
-using System.Runtime.CompilerServices;
-
 namespace DWS_Lite.lang {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -24,27 +19,27 @@ namespace DWS_Lite.lang {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
-    [DebuggerNonUserCode()]
-    [CompilerGenerated()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class fr_FR {
         
-        private static ResourceManager resourceMan;
+        private static global::System.Resources.ResourceManager resourceMan;
         
-        private static CultureInfo resourceCulture;
+        private static global::System.Globalization.CultureInfo resourceCulture;
         
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal fr_FR() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        internal static ResourceManager ResourceManager {
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
-                if (ReferenceEquals(resourceMan, null)) {
-                    ResourceManager temp = new ResourceManager("DWS_Lite.lang.fr-FR", typeof(fr_FR).Assembly);
+                if (object.ReferenceEquals(resourceMan, null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DWS_Lite.lang.fr-FR", typeof(fr_FR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -55,8 +50,8 @@ namespace DWS_Lite.lang {
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        internal static CultureInfo Culture {
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -111,7 +106,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ajouter des domaines espion au fichier HOSTS et bloquer dans le pare-feu Windows.
+        ///   Looks up a localized string similar to Ajouter des domaines espion au fichier HOSTS et bloquer les IP dans le pare-feu Windows.
         /// </summary>
         internal static string checkBoxAddToHosts {
             get {
@@ -165,7 +160,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Visionneuse de photos Windows par défaut.
+        ///   Looks up a localized string similar to Mettre la Visionneuse de photos Windows par défaut.
         /// </summary>
         internal static string checkBoxSetDefaultPhoto {
             get {
@@ -183,7 +178,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Complete.
+        ///   Looks up a localized string similar to Fini.
         /// </summary>
         internal static string Complete {
             get {
@@ -259,11 +254,20 @@ namespace DWS_Lite.lang {
         /// <summary>
         ///   Looks up a localized string similar to Fini avec des erreurs - {0}
         ///Un redémarrage est nécessaire pour désactiver tous les logiciels espions.
-        ///Redémarrer maintenant?.
+        ///Redémarrer maintenant ?.
         /// </summary>
         internal static string ErrorMSG {
             get {
                 return ResourceManager.GetString("ErrorMSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Merci de spécifier le chemin du fichier msosync.exe. Si Office 2016 est installé avec son chemin par défaut sur C:, appuez sur &quot;Annuler&quot;.
+        /// </summary>
+        internal static string FindOffice16FileT {
+            get {
+                return ResourceManager.GetString("FindOffice16FileT", resourceCulture);
             }
         }
         
@@ -277,7 +281,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Les applications METRO sont définitivement supprimés, sans possibilité de récupération..
+        ///   Looks up a localized string similar to Les applications Metro seront définitivement supprimées, sans possibilité de les réinstaller..
         /// </summary>
         internal static string labelInfoDeleteMetroApps {
             get {
@@ -313,10 +317,10 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This program destroys spying on Windows 7/8/8.1/10.
-        ///The program is open source code, which is on github.
-        ///This program completely destroys spying. Removes some elements of telemetry and the other turns off, disables Windows Defender, Cortana, and much more. As the program disables Windows Update, which allows you to remain anonymous and not to receive updates of new spyware.
-        ///The delete Metro applications is very good, because they work in the background, and devour memory, and some of them spying on you.        /// [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Ce logiciel supprime les espions de Windows 7/8/8.1/10.
+        ///Le logiciel est open source, son code source est disponible sur GitHub.
+        ///Ce logiciel supprime tout l&apos;espionnage de Windows. Il enlève pas mal d&apos;éléments dont la télémétrie et en désactive d&apos;autres, par exemple il désactive Windows Defender, Cortana, et plus encore. Comme le logiciel désactive Windows Update il vous permet de ne plus envoyer de données et de ne plus avoir les nouveaux spyware de Windows.
+        ///La suppression des applications Metro est très bie [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ReadMeTextBox {
             get {
@@ -334,7 +338,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove all old DWS firewall rules.
+        ///   Looks up a localized string similar to Enlever les anciennes règles DWS du pare-feu Windows.
         /// </summary>
         internal static string RemoveAllOldFirewallRules {
             get {
@@ -343,7 +347,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Report a bug.
+        ///   Looks up a localized string similar to Signaler un bug.
         /// </summary>
         internal static string ReportABug {
             get {
@@ -358,15 +362,6 @@ namespace DWS_Lite.lang {
         internal static string Restart {
             get {
                 return ResourceManager.GetString("Restart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ce programme ne fonctionne que sur Windows 10.
-        /// </summary>
-        internal static string RunOnlyWin10 {
-            get {
-                return ResourceManager.GetString("RunOnlyWin10", resourceCulture);
             }
         }
         

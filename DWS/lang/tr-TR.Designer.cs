@@ -22,14 +22,14 @@ namespace DWS_Lite.lang {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class pl_PL {
+    internal class tr_TR {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal pl_PL() {
+        internal tr_TR() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DWS_Lite.lang {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DWS_Lite.lang.pl-PL", typeof(pl_PL).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DWS_Lite.lang.tr-TR", typeof(tr_TR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usuń wszystkie aplikacje Metro Windows 10.
+        ///   Looks up a localized string similar to Tüm Metro Uygulamalarını Sil.
         /// </summary>
         internal static string btnDeleteAllWindows10Apps {
             get {
@@ -70,7 +70,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Odinstaluj OneDrive.
+        ///   Looks up a localized string similar to One Drive&apos;ı Sil.
         /// </summary>
         internal static string btnDeleteOneDrive {
             get {
@@ -79,7 +79,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edytuj plik hosts.
+        ///   Looks up a localized string similar to Hosts Dosyasını Aç ve Düzenle.
         /// </summary>
         internal static string btnOpenAndEditHosts {
             get {
@@ -88,7 +88,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Włącz tryb zaawansowany.
+        ///   Looks up a localized string similar to Profesyonel Modu Etkinleştir.
         /// </summary>
         internal static string btnProfessionalMode {
             get {
@@ -97,7 +97,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Przywracanie systemu.
+        ///   Looks up a localized string similar to Sistemi Geri Düzelt.
         /// </summary>
         internal static string btnRestoreSystem {
             get {
@@ -106,7 +106,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zablokuj domeny szpiegujące w pliku hosts i Zaporze systemu Windows.
+        ///   Looks up a localized string similar to Casus Domainleri Hosts Dosyasına Ekle, ve Windows Firewallda Engelle.
         /// </summary>
         internal static string checkBoxAddToHosts {
             get {
@@ -115,7 +115,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Utwórz punkt przywracania systemu.
+        ///   Looks up a localized string similar to Sistem Geri Yükleme Noktası Oluştur.
         /// </summary>
         internal static string checkBoxCreateSystemRestorePoint {
             get {
@@ -124,7 +124,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usuń aplikacje Metro Windows 10.
+        ///   Looks up a localized string similar to Windows 10 Metro Uygulamalarını Sil.
         /// </summary>
         internal static string checkBoxDeleteWindows10Apps {
             get {
@@ -133,7 +133,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wyłącz wysyłanie prywatnych danych.
+        ///   Looks up a localized string similar to Özel Ayarları Devre Dışı Bırak.
         /// </summary>
         internal static string checkBoxDisablePrivateSettings {
             get {
@@ -142,7 +142,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wyłącz Windows Defender.
+        ///   Looks up a localized string similar to Windows Defenderı Devre Dışı Bırak.
         /// </summary>
         internal static string checkBoxDisableWindowsDefender {
             get {
@@ -151,7 +151,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usuń keylogger i telemetrię.
+        ///   Looks up a localized string similar to Telemetriyi ve Keylogger&apos;ı Sil.
         /// </summary>
         internal static string checkBoxKeyLoggerAndTelemetry {
             get {
@@ -160,7 +160,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ustaw program &apos;Przeglądarka fotografii systemu Windows&apos; jako domyślny.
+        ///   Looks up a localized string similar to Varsayılan Fotoğraf Görüntüleyiciyi etkinleştir.
         /// </summary>
         internal static string checkBoxSetDefaultPhoto {
             get {
@@ -169,7 +169,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wyłącz śledzące zadania.
+        ///   Looks up a localized string similar to Casus İşlemleri Devre Dışı Bırak.
         /// </summary>
         internal static string checkBoxSPYTasks {
             get {
@@ -178,7 +178,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gotowe.
+        ///   Looks up a localized string similar to Başarılı.
         /// </summary>
         internal static string Complete {
             get {
@@ -187,8 +187,8 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aby zakończyć wprowadzanie zmian, należy uruchomić ponownie komputer.
-        ///Czy chcesz zrobić to teraz?.
+        ///   Looks up a localized string similar to Başarılı!
+        ///Casus Uyguluamaları Devredışı Bırakmak İçin Yeniden Başlatma Gerekiyor.Yeniden Başlatılsınmı ?.
         /// </summary>
         internal static string CompleteMSG {
             get {
@@ -197,7 +197,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usuń.
+        ///   Looks up a localized string similar to Sil.
         /// </summary>
         internal static string Delete {
             get {
@@ -206,7 +206,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usuń aplikacje.
+        ///   Looks up a localized string similar to Uygulamaları Sil.
         /// </summary>
         internal static string DeleteApps {
             get {
@@ -215,7 +215,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wyłącz.
+        ///   Looks up a localized string similar to Devredışı Bırak.
         /// </summary>
         internal static string Disable {
             get {
@@ -224,7 +224,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Włącz.
+        ///   Looks up a localized string similar to Etkinleştir.
         /// </summary>
         internal static string Enable {
             get {
@@ -233,7 +233,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wystąpił błąd.
+        ///   Looks up a localized string similar to Hata.
         /// </summary>
         internal static string Error {
             get {
@@ -242,9 +242,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Podczas wprowadzania zmian wystąpiły {0} błędy.
-        ///Aby zakończyć proces, należy uruchomić ponownie komputer.
-        ///Czy chcesz zrobić to teraz?.
+        ///   Looks up a localized string similar to Başarılı. Hatalar - {0}Casus Uyguluamaları Devredışı Bırakmak İçin Yeniden Başlatma Gerekiyor.Yeniden Başlatılsınmı ?.
         /// </summary>
         internal static string ErrorMSG {
             get {
@@ -253,7 +251,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Określ ścieżkę do pliku msosync.exe. Jeśli Office 2016 jest zainstalowany w zwykły sposób na dysku C, kliknij przycisk &quot;Anuluj&quot;.
+        ///   Looks up a localized string similar to  msosync.exe yolunu belirtin. eğer Office 2016 standart olarak C&apos;ye yüklü ise, &quot;Cancel&quot; a basın..
         /// </summary>
         internal static string FindOffice16FileT {
             get {
@@ -262,7 +260,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Informacja.
+        ///   Looks up a localized string similar to Bilgi.
         /// </summary>
         internal static string Info {
             get {
@@ -271,7 +269,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aplikacje Metro zostaną usunięte na stałe i nie będzie możliwości ich przywrócenia..
+        ///   Looks up a localized string similar to Metro Uygulamaları Geri Dönüş Olmadan Tamamen Silindi..
         /// </summary>
         internal static string labelInfoDeleteMetroApps {
             get {
@@ -280,7 +278,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Linki.
+        ///   Looks up a localized string similar to Linkler.
         /// </summary>
         internal static string Links {
             get {
@@ -289,7 +287,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kliknij przycisk &apos;OK&apos; i poczekaj 15 minut..
+        ///   Looks up a localized string similar to OK butonuna basın ve 15 Dakika Bekleyin.
         /// </summary>
         internal static string PressOkAndWait15 {
             get {
@@ -298,7 +296,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pytanie.
+        ///   Looks up a localized string similar to Sorular.
         /// </summary>
         internal static string Question {
             get {
@@ -307,10 +305,9 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dzięki tej aplikacji możesz usunąć oprogramowanie szpiegujące w systemach Windows 7/8/8.1/10.
-        ///Jest to program o otwartym źródle, które jest dostępne na Github.
-        ///Usuwane są elementy telemetrii, wyłączany jest Windows Defender, Cortana, a także wiele innych niepożądanych części systemu. Aplikacja wyłącza także Windows Update, co pozwala ci na pozostanie anonimowym. Kolejną korzyścią jest nieotrzymywanie aktualizacji wbudowanego oprogramowania szpiegującego.
-        ///Jedną z funkcji aplikacji jest usuwanie aplikacji Met [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Bu Yazılım Windows 7/8/8.1/10&apos;daki casus yazılımları temizler .
+        ///Program Github ile yapılmıştır ve açık kaynak kodludur..Bu Program Takip Edilmeyi Tamamen Yok eder. Telemetriden bazı şeyleri siler ve etkisizleştirir,Windows Defender&apos;ı, Cortana&apos;yı, ve daha bir çok şeyi siler. Programı Windows Update&apos;i devredışı bırakarak takip edilme riskinizi ortadan kaldırır.
+        ///Metro uygulamaları silmek gerçekten faydalı çünkü arkaplanda çalışarak belleğinizi yorar. ve tabiki takip edilmenize olanak sağlar.Ayrıca program birç [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ReadMeTextBox {
             get {
@@ -319,7 +316,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Czy jesteś pewny swojej decyzji?.
+        ///   Looks up a localized string similar to Eminmisiniz ?.
         /// </summary>
         internal static string Really {
             get {
@@ -328,7 +325,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usuń stare reguły zapory od DWS.
+        ///   Looks up a localized string similar to Eski DWS firewall kurallarını etkisizleştir..
         /// </summary>
         internal static string RemoveAllOldFirewallRules {
             get {
@@ -337,7 +334,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zgłoś błąd.
+        ///   Looks up a localized string similar to Bug Bildir..
         /// </summary>
         internal static string ReportABug {
             get {
@@ -346,8 +343,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aby zakończyć proces, należy uruchomić ponownie komputer.
-        ///Czy chcesz zrobić to teraz?.
+        ///   Looks up a localized string similar to Yeniden Başlatma Gerekiyor.Yeniden Başlatılsınmı?.
         /// </summary>
         internal static string Restart {
             get {
@@ -356,7 +352,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to O programie.
+        ///   Looks up a localized string similar to Hakkında.
         /// </summary>
         internal static string tabPageAbout {
             get {
@@ -365,7 +361,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Strona główna.
+        ///   Looks up a localized string similar to Ana.
         /// </summary>
         internal static string tabPageMain {
             get {
@@ -374,7 +370,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opis programu.
+        ///   Looks up a localized string similar to Beni Oku.
         /// </summary>
         internal static string tabPageReadMe {
             get {
@@ -383,7 +379,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ustawienia.
+        ///   Looks up a localized string similar to Ayarlar.
         /// </summary>
         internal static string tabPageSettings {
             get {
@@ -392,7 +388,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Narzędzia.
+        ///   Looks up a localized string similar to Hizmetler.
         /// </summary>
         internal static string tabPageUtilites {
             get {
@@ -401,7 +397,7 @@ namespace DWS_Lite.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ostrzeżenie.
+        ///   Looks up a localized string similar to Uyarı.
         /// </summary>
         internal static string Warning {
             get {
