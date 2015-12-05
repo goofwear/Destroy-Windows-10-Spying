@@ -21,7 +21,7 @@ using Microsoft.Win32;
 
 namespace DWS_Lite
 {
-    public partial class DestroyWindowsSpyingMainForm : Form
+    public partial class MainDwsForm : Form
     {
         private const string LogFileName = "DWS.log";
         // ReSharper disable once InconsistentNaming
@@ -40,8 +40,9 @@ namespace DWS_Lite
         private string _system32Location;
         private bool _win10 = true;
 
-        public DestroyWindowsSpyingMainForm(string[] args)
+        public MainDwsForm(string[] args)
         {
+
             InitializeComponent();
             // Re create log file
             RecreateLogFile(LogFileName);
@@ -62,11 +63,11 @@ namespace DWS_Lite
             {
                 _OutPut("Error get icon.", LogLevel.Error);
             }
-            Text += Resources.build_number;
 #if DEBUG
             Text += @" DEBUG ";
 #endif
-            labelBuildDataTime.Text = string.Format(@"Build number:{0}  |  Build Time:{1}", Resources.build_number, Resources.build_datatime);
+            labelBuildDataTime.Text = string.Format(@"Build number:{0}  |  Build Time:{1}", Resources.build_number,
+                Resources.build_datatime);
 
             SetLanguage(_GetLang(args)); // set language
             ChangeLanguage(); // change language
@@ -75,7 +76,7 @@ namespace DWS_Lite
             new Thread(AnimateBackground).Start(); // animate border (new thread)
         }
 
-        public override sealed string Text
+        public sealed override string Text
         {
             get { return base.Text; }
             set
@@ -127,20 +128,22 @@ namespace DWS_Lite
             try
             {
                 var latestVersion = new WebClient().DownloadString(
-                    "http://raw.githubusercontent.com/Nummer/Destroy-Windows-10-Spying/master/DWS/Resources/build_number.txt"); // download latest build number on github
+                    "http://raw.githubusercontent.com/Nummer/Destroy-Windows-10-Spying/master/DWS/Resources/build_number.txt");
+                    // download latest build number on github
                 // download latest build number on github
                 if (Convert.ToInt32(Resources.build_number) <
                     Convert.ToInt32(latestVersion))
                 {
                     if (
-                        MessageBox.Show(string.Format("New version found.\nBuild number: {0}\nDownload now?",latestVersion),
+                        MessageBox.Show(
+                            string.Format("New version found.\nBuild number: {0}\nDownload now?", latestVersion),
                             @"Update",
                             MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         Process.Start("http://dws.wzor.net/");
                     }
                 }
-                _OutPut(string.Format("Latest version number: {0}",latestVersion));
+                _OutPut(string.Format("Latest version number: {0}", latestVersion));
             }
                 // ReSharper disable once UnusedVariable
             catch (Exception ex)
@@ -167,28 +170,29 @@ namespace DWS_Lite
 
         private void StealthMode(IEnumerable<string> args)
         {
-            foreach (var currentArg in args)
+            var currentArgs = args as string[] ?? args.ToArray();
+            foreach (var currentArg in currentArgs)
             {
                 if (currentArg.IndexOf("/deleteapp=", StringComparison.Ordinal) > -1)
                 {
                     DeleteWindows10MetroApp(currentArg.Replace("/deleteapp=", null));
-                    Process.GetCurrentProcess().Kill();
                 }
-                if (currentArg.IndexOf("/destroy", StringComparison.Ordinal) <= -1) continue;
-                WindowState = FormWindowState.Minimized;
-                ShowInTaskbar = false;
-                _destroyFlag = true;
-                //Windows 10
-                if (_win10)
+                if (currentArg.IndexOf("/destroy", StringComparison.Ordinal) > -1)
                 {
-                    DestroyWindowsSpyingMainThread();
+                    WindowState = FormWindowState.Minimized;
+                    ShowInTaskbar = false;
+                    _destroyFlag = true;
+                    //Windows 10
+                    if (_win10) DestroyWindowsSpyingMainThread();
+                    else Dws78MainThread();
                 }
-                else
+                if (currentArg.IndexOf("/deleteonedrive", StringComparison.Ordinal) > -1)
                 {
-                    Dws78MainThread();
+                    DeleteOneDrive();
                 }
-                Process.GetCurrentProcess().Kill();
             }
+            if (currentArgs.Any())
+            Process.GetCurrentProcess().Kill();
         }
 
         /*
@@ -214,14 +218,13 @@ namespace DWS_Lite
         private void CheckWindowsVersion()
         {
             var windowsBuildNumber = WindowsUtil.GetWindowsBuildNumber();
-
             if (windowsBuildNumber < 7600)
             {
-                if(MessageBox.Show(@"Minimum windows version - 7\nExit from the program?", @"Error", MessageBoxButtons.YesNo,
+                if (MessageBox.Show(@"Minimum windows version - 7\nExit from the program?", @"Error",
+                    MessageBoxButtons.YesNo,
                     MessageBoxIcon.Error) == DialogResult.Yes)
-                Process.GetCurrentProcess().Kill();
+                    Process.GetCurrentProcess().Kill();
             }
-
             // check Win 7 or 8.1
             if (windowsBuildNumber >= 10000) return;
             _win10 = false;
@@ -232,6 +235,11 @@ namespace DWS_Lite
             checkBoxDeleteWindows10Apps.Enabled = false;
             btnDestroyWindowsSpying.Visible = false;
             btnDestroyWindows78Spy.Visible = true;
+            for (var i = 0; i < _updatesnumberlist.Length; i++)
+            {
+                checkedListBoxUpdatesW78.Items.Add("KB" + _updatesnumberlist[i]);
+                checkedListBoxUpdatesW78.SetItemChecked(i, true);
+            }
             //------------------------------------------
         }
 
@@ -293,7 +301,7 @@ namespace DWS_Lite
             {
                 Invoke(new MethodInvoker(delegate
                 {
-                    this.ControlBox = enableordisable;
+                    ControlBox = enableordisable;
                     _CloseButton.Enabled = enableordisable;
                     btnDestroyWindowsSpying.Enabled = enableordisable;
                     tabPageSettings.Enabled = enableordisable;
@@ -335,7 +343,7 @@ namespace DWS_Lite
 
         public void DeleteFile(string filepath)
         {
-            RunCmd(string.Format("/c del /F /Q \"{0}\"",filepath));
+            RunCmd(string.Format("/c del /F /Q \"{0}\"", filepath));
         }
 
         public void RunCmd(string args)
@@ -402,13 +410,15 @@ namespace DWS_Lite
         private static string GetWindowsBuildVersion()
         {
             // в value массив из байт
-            var value = string.Format("\r\nWindows Version: {0}\r\nBuild: {1}",WindowsUtil.GetProductName(),WindowsUtil.GetSystemBuild());
+            var value = string.Format("\r\nWindows Version: {0}\r\nBuild: {1}", WindowsUtil.GetProductName(),
+                WindowsUtil.GetSystemBuild());
             return value;
         }
 
         private void DeleteWindows10MetroApp(string appname)
         {
-            ProcStartargs("powershell", string.Format("-command \"Get-AppxPackage *{0}* | Remove-AppxPackage\"", appname));
+            ProcStartargs("powershell",
+                string.Format("-command \"Get-AppxPackage *{0}* | Remove-AppxPackage\"", appname));
         }
 
         private void StartDestroyWindowsSpying()
@@ -417,7 +427,7 @@ namespace DWS_Lite
             _fatalErrors = 0;
             EnableOrDisableTab(false);
             SetCompleteText(true);
-            _OutPut(string.Format("Starting: {0}.",DateTime.Now));
+            _OutPut(string.Format("Starting: {0}.", DateTime.Now));
             _OutPut(GetWindowsBuildVersion());
             _OutPutSplit();
             ProgressBarStatus.Value = 0;
@@ -449,45 +459,12 @@ namespace DWS_Lite
             {
                 // DISABLE TELEMETRY
                 _OutPut("Disable telemetry...");
-                RunCmd("/c net stop DiagTrack ");
-                RunCmd("/c net stop diagnosticshub.standardcollector.service ");
-                RunCmd("/c net stop dmwappushservice ");
-                RunCmd("/c net stop WMPNetworkSvc ");
-                RunCmd("/c sc config DiagTrack start=disabled ");
-                RunCmd("/c sc config diagnosticshub.standardcollector.service start=disabled ");
-                RunCmd("/c sc config dmwappushservice start=disabled ");
-                RunCmd("/c sc config WMPNetworkSvc start=disabled ");
-                RunCmd(
-                    "/c REG ADD HKLM\\SYSTEM\\ControlSet001\\Control\\WMI\\AutoLogger\\AutoLogger-Diagtrack-Listener /v Start /t REG_DWORD /d 0 /f");
-                RunCmd("/c sc delete dmwappushsvc");
-                RunCmd("/c sc delete \"Diagnostics Tracking Service\"");
-                RunCmd("/c sc delete diagtrack");
-                RunCmd(
-                    "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Device Metadata\" /v \"PreventDeviceMetadataFromNetwork\" /t REG_DWORD /d 1 /f ");
-                RunCmd(
-                    "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f ");
-                RunCmd(
-                    "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\MRT\" /v \"DontOfferThroughWUAU\" /t REG_DWORD /d 1 /f ");
-                RunCmd(
-                    "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\SQMClient\\Windows\" /v \"CEIPEnable\" /t REG_DWORD /d 0 /f ");
-                RunCmd(
-                    "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v \"AITEnable\" /t REG_DWORD /d 0 /f ");
-                RunCmd(
-                    "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v \"DisableUAR\" /t REG_DWORD /d 1 /f ");
-                RunCmd(
-                    "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f ");
-                RunCmd(
-                    "/c reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\WMI\\AutoLogger\\AutoLogger-Diagtrack-Listener\" /v \"Start\" /t REG_DWORD /d 0 /f ");
-                RunCmd(
-                    "/c reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\WMI\\AutoLogger\\SQMLogger\" /v \"Start\" /t REG_DWORD /d 0 /f ");
-                RunCmd(
-                    "/c reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Siuf\\Rules\" /v \"NumberOfSIUFInPeriod\" /t REG_DWORD /d 0 /f ");
-                RunCmd(
-                    "/c reg delete \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Siuf\\Rules\" /v \"PeriodInNanoSeconds\" /f ");
+                DigTrackFullRemove();
                 // DELETE KEYLOGGER
                 _OutPut("Delete keylogger...");
                 RunCmd(
-                    "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" /v \"AllowCortana\" /t REG_DWORD /d 0 /f "); // disable Cortana;
+                    "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\" /v \"AllowCortana\" /t REG_DWORD /d 0 /f ");
+                    // disable Cortana;
                 _OutPut("Cortana disable #1");
             }
             Progressbaradd(15); //25
@@ -650,6 +627,45 @@ namespace DWS_Lite
             }
         }
 
+        private void DigTrackFullRemove()
+        {
+            RunCmd("/c net stop DiagTrack ");
+            RunCmd("/c net stop diagnosticshub.standardcollector.service ");
+            RunCmd("/c net stop dmwappushservice ");
+            RunCmd("/c net stop WMPNetworkSvc ");
+            RunCmd("/c sc config DiagTrack start=disabled ");
+            RunCmd("/c sc config diagnosticshub.standardcollector.service start=disabled ");
+            RunCmd("/c sc config dmwappushservice start=disabled ");
+            RunCmd("/c sc config WMPNetworkSvc start=disabled ");
+            RunCmd(
+                "/c REG ADD HKLM\\SYSTEM\\ControlSet001\\Control\\WMI\\AutoLogger\\AutoLogger-Diagtrack-Listener /v Start /t REG_DWORD /d 0 /f");
+            RunCmd("/c sc delete dmwappushsvc");
+            RunCmd("/c sc delete \"Diagnostics Tracking Service\"");
+            RunCmd("/c sc delete diagtrack");
+            RunCmd(
+                "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Device Metadata\" /v \"PreventDeviceMetadataFromNetwork\" /t REG_DWORD /d 1 /f ");
+            RunCmd(
+                "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f ");
+            RunCmd(
+                "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\MRT\" /v \"DontOfferThroughWUAU\" /t REG_DWORD /d 1 /f ");
+            RunCmd(
+                "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\SQMClient\\Windows\" /v \"CEIPEnable\" /t REG_DWORD /d 0 /f ");
+            RunCmd(
+                "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v \"AITEnable\" /t REG_DWORD /d 0 /f ");
+            RunCmd(
+                "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v \"DisableUAR\" /t REG_DWORD /d 1 /f ");
+            RunCmd(
+                "/c reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f ");
+            RunCmd(
+                "/c reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\WMI\\AutoLogger\\AutoLogger-Diagtrack-Listener\" /v \"Start\" /t REG_DWORD /d 0 /f ");
+            RunCmd(
+                "/c reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\WMI\\AutoLogger\\SQMLogger\" /v \"Start\" /t REG_DWORD /d 0 /f ");
+            RunCmd(
+                "/c reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Siuf\\Rules\" /v \"NumberOfSIUFInPeriod\" /t REG_DWORD /d 0 /f ");
+            RunCmd(
+                "/c reg delete \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Siuf\\Rules\" /v \"PeriodInNanoSeconds\" /f ");
+        }
+
         private void SetCompleteText(bool start = false)
         {
             if (_destroyFlag)
@@ -663,7 +679,8 @@ namespace DWS_Lite
             {
                 if (_fatalErrors == 0)
                 {
-                    StatusCommandsLable.Text = string.Format("Destroy Windows 10 Spying - {0}!",GetTranslateText("Complete"));
+                    StatusCommandsLable.Text = string.Format("Destroy Windows 10 Spying - {0}!",
+                        GetTranslateText("Complete"));
                     StatusCommandsLable.ForeColor = Color.DarkGreen;
                     if (MessageBox.Show(GetTranslateText("CompleteMSG"), GetTranslateText("Info"),
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
@@ -672,7 +689,7 @@ namespace DWS_Lite
                 }
                 else
                 {
-                    StatusCommandsLable.Text = string.Format("Destroy Windows 10 Spying - errors: {0}",_fatalErrors);
+                    StatusCommandsLable.Text = string.Format("Destroy Windows 10 Spying - errors: {0}", _fatalErrors);
                     StatusCommandsLable.ForeColor = Color.Red;
                     try
                     {
@@ -752,6 +769,13 @@ namespace DWS_Lite
             {
                 string[] hostsdomains =
                 {
+                    "statsfe2.update.microsoft.com.akadns.net",
+                    "fe2.update.microsoft.com.akadns.net",
+                    "s0.2mdn.net",
+                    "survey.watson.microsoft.com",
+                    "view.atdmt.com",
+                    "watson.microsoft.com",
+                    "watson.ppe.telemetry.microsoft.com",
                     "vortex.data.microsoft.com",
                     "vortex-win.data.microsoft.com",
                     "telecommand.telemetry.microsoft.com",
@@ -768,21 +792,16 @@ namespace DWS_Lite
                     "services.wes.df.telemetry.microsoft.com",
                     "sqm.df.telemetry.microsoft.com",
                     "telemetry.microsoft.com",
-                    "watson.ppe.telemetry.microsoft.com",
                     "telemetry.appex.bing.net",
                     "telemetry.urs.microsoft.com",
                     "telemetry.appex.bing.net:443",
                     "settings-sandbox.data.microsoft.com",
-                    "survey.watson.microsoft.com",
                     "watson.live.com",
-                    "watson.microsoft.com",
                     "statsfe2.ws.microsoft.com",
                     "corpext.msitadfs.glbdns2.microsoft.com",
                     "compatexchange.cloudapp.net",
                     "a-0001.a-msedge.net",
-                    "statsfe2.update.microsoft.com.akadns.net",
                     "sls.update.microsoft.com.akadns.net",
-                    "fe2.update.microsoft.com.akadns.net",
                     "diagnostics.support.microsoft.com",
                     "corp.sts.microsoft.com",
                     "statsfe1.ws.microsoft.com",
@@ -816,8 +835,13 @@ namespace DWS_Lite
                     "fe3.delivery.dsp.mp.microsoft.com.nsatc.net",
                     "cache.datamart.windows.com",
                     "db3wns2011111.wns.windows.com", // NEW TH2 spy hosts
-                    "deploy.static.akamaitechnologies.com",
-                    "akamaitechnologies.com"
+                    //"deploy.static.akamaitechnologies.com",
+                    //"akamaitechnologies.com"
+                    "settings-win.data.microsoft.com",
+                    "v10.vortex-win.data.microsoft.com",
+                    "win10.ipv6.microsoft.com",
+                    "ca.telemetry.microsoft.com",
+                    "i1.services.social.microsoft.com.nsatc.net"
                 };
                 var hostslocation = _system32Location + @"drivers\etc\hosts";
                 string hosts = null;
@@ -1004,7 +1028,7 @@ namespace DWS_Lite
             RunCmd("/c netsh advfirewall firewall delete rule name=\"WindowsUpdateBlock\"");
             RunCmd(
                 "/c netsh advfirewall firewall add rule name=\"WindowsUpdateBlock\" dir=out interface=any action=block service=wuauserv");
-            
+
             _OutPut("Windows Update disabled");
         }
 
@@ -1053,7 +1077,7 @@ namespace DWS_Lite
         {
             ProfessionalModeSet(btnProfessionalMode.Checked);
             Text = btnProfessionalMode.Checked
-                ? string.Format("{0}  !Professional mode!",Text)
+                ? string.Format("{0}  !Professional mode!", Text)
                 : Text.Replace("  !Professional mode!", string.Empty);
         }
 
@@ -1073,6 +1097,8 @@ namespace DWS_Lite
             groupBoxUACEdit.Enabled = enableordisable;
             btnDeleteMetroAppsInfo.Enabled = enableordisable;
             btnDeleteOneDrive.Enabled = enableordisable;
+            checkBoxDelKeyloggerTW78.Enabled = enableordisable;
+            checkedListBoxUpdatesW78.Enabled = enableordisable && checkBoxDeleteWindows78Updates.Checked;
             if (WindowsUtil.SystemRestore_Status() == 0)
             {
                 checkBoxCreateSystemRestorePoint.Checked = false;
@@ -1097,45 +1123,51 @@ namespace DWS_Lite
 
         private void btnDeleteOneDrive_Click(object sender, EventArgs e)
         {
-            new Thread(() =>
-            {
-                EnableOrDisableTab(false);
-                try
-                {
-                    RunCmd("/c taskkill /f /im OneDrive.exe > NUL 2>&1");
-                    RunCmd("/c ping 127.0.0.1 -n 5 > NUL 2>&1");
-                    if (File.Exists(_systemPath + @"Windows\System32\OneDriveSetup.exe"))
-                        ProcStartargs(_systemPath + @"Windows\System32\OneDriveSetup.exe", "/uninstall");
-                    if (File.Exists(_systemPath + @"Windows\SysWOW64\OneDriveSetup.exe"))
-                        ProcStartargs(_systemPath + @"Windows\SysWOW64\OneDriveSetup.exe", "/uninstall");
-                    RunCmd("/c ping 127.0.0.1 -n 5 > NUL 2>&1");
-                    RunCmd("/c rd \"%USERPROFILE%\\OneDrive\" /Q /S > NUL 2>&1");
-                    RunCmd("/c rd \"C:\\OneDriveTemp\" /Q /S > NUL 2>&1");
-                    RunCmd("/c rd \"%LOCALAPPDATA%\\Microsoft\\OneDrive\" /Q /S > NUL 2>&1");
-                    RunCmd("/c rd \"%PROGRAMDATA%\\Microsoft OneDrive\" /Q /S > NUL 2>&1");
-                    RunCmd("/c REG DELETE \"HKEY_CLASSES_ROOT\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\" /f > NUL 2>&1");
-                    RunCmd("/c REG DELETE \"HKEY_CLASSES_ROOT\\Wow6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\" /f > NUL 2>&1");
+            new Thread(DeleteOneDrive).Start();
+        }
 
-                    SetRegValueHklm(@"SOFTWARE\Policies\Microsoft\Windows\OneDrive", "DisableFileSyncNGSC", "1", RegistryValueKind.DWord);
-                }
-                catch (Exception ex)
+        void DeleteOneDrive()
+        {
+
+            EnableOrDisableTab(false);
+            try
+            {
+                RunCmd("/c taskkill /f /im OneDrive.exe > NUL 2>&1");
+                RunCmd("/c ping 127.0.0.1 -n 5 > NUL 2>&1");
+                if (File.Exists(_systemPath + @"Windows\System32\OneDriveSetup.exe"))
+                    ProcStartargs(_systemPath + @"Windows\System32\OneDriveSetup.exe", "/uninstall");
+                if (File.Exists(_systemPath + @"Windows\SysWOW64\OneDriveSetup.exe"))
+                    ProcStartargs(_systemPath + @"Windows\SysWOW64\OneDriveSetup.exe", "/uninstall");
+                RunCmd("/c ping 127.0.0.1 -n 5 > NUL 2>&1");
+                RunCmd("/c rd \"%USERPROFILE%\\OneDrive\" /Q /S > NUL 2>&1");
+                RunCmd("/c rd \"C:\\OneDriveTemp\" /Q /S > NUL 2>&1");
+                RunCmd("/c rd \"%LOCALAPPDATA%\\Microsoft\\OneDrive\" /Q /S > NUL 2>&1");
+                RunCmd("/c rd \"%PROGRAMDATA%\\Microsoft OneDrive\" /Q /S > NUL 2>&1");
+                RunCmd(
+                    "/c REG DELETE \"HKEY_CLASSES_ROOT\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\" /f > NUL 2>&1");
+                RunCmd(
+                    "/c REG DELETE \"HKEY_CLASSES_ROOT\\Wow6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\" /f > NUL 2>&1");
+
+                SetRegValueHklm(@"SOFTWARE\Policies\Microsoft\Windows\OneDrive", "DisableFileSyncNGSC", "1",
+                    RegistryValueKind.DWord);
+            }
+            catch (Exception ex)
+            {
+                Invoke(new MethodInvoker(delegate
                 {
-                    Invoke(new MethodInvoker(delegate
-                    {
-                        MessageBox.Show(ex.Message, GetTranslateText("Error"), MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    }));
+                    MessageBox.Show(ex.Message, GetTranslateText("Error"), MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }));
 #if DEBUG
                     _OutPut(ex.Message, LogLevel.Debug);
 #endif
-                }
-                Invoke(new MethodInvoker(delegate
-                {
-                    MessageBox.Show(GetTranslateText("Complete"), GetTranslateText("Info"), MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                }));
-                EnableOrDisableTab(true);
-            }).Start();
+            }
+            Invoke(new MethodInvoker(delegate
+            {
+                MessageBox.Show(GetTranslateText("Complete"), GetTranslateText("Info"), MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }));
+            EnableOrDisableTab(true);
         }
 
         private void linkLabelSourceCode_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1197,7 +1229,7 @@ namespace DWS_Lite
                     ChangeLanguage();
                     break;
                 case "it-CH":
-                    _rm = it_CH.ResourceManager;
+                    _rm = it_IT.ResourceManager;
                     ChangeLanguage();
                     break;
                 case "cs-CZ":
@@ -1243,7 +1275,7 @@ namespace DWS_Lite
             new Thread(Dws78MainThread).Start();
         }
 
-        void Dws78MainThread()
+        private void Dws78MainThread()
         {
             if (checkBoxAddToHosts78.Checked)
             {
@@ -1261,6 +1293,12 @@ namespace DWS_Lite
             {
                 GwxDelete();
             }
+            if (checkBoxDelKeyloggerTW78.Checked)
+            {
+                DigTrackFullRemove();
+            }
+            if (_destroyFlag)
+                return;
             Invoke(new MethodInvoker(delegate
             {
                 btnDestroyWindows78Spy.Enabled = true;
@@ -1282,9 +1320,9 @@ namespace DWS_Lite
                     if (Directory.Exists(gwxDir))
                     {
                         RunCmd("/c TASKKILL /F /IM gwx.exe");
-                        RunCmd(string.Format("/c takeown /f \"{0}\" /d y",gwxDir));
-                        RunCmd(string.Format("/c icacls \"{0}\" /grant {1}:F /q",gwxDir,userName));
-                        RunCmd(string.Format("/c rmdir /s /q {0}",gwxDir));
+                        RunCmd(string.Format("/c takeown /f \"{0}\" /d y", gwxDir));
+                        RunCmd(string.Format("/c icacls \"{0}\" /grant {1}:F /q", gwxDir, userName));
+                        RunCmd(string.Format("/c rmdir /s /q {0}", gwxDir));
                         _OutPut("Delete GWX");
                     }
                     else
@@ -1304,40 +1342,45 @@ namespace DWS_Lite
             }
         }
 
+        private readonly string[] _updatesnumberlist =
+        {
+            "3080149",
+            "3075249",
+            "3068708",
+            "3044374",
+            "3035583",
+            "3022345",
+            "3021917",
+            "3015249",
+            "3012973",
+            "2990214",
+            "2977759",
+            "2976978",
+            "2952664",
+            "2922324",
+            "971033",
+            "3083324", //win7
+            "3083325", //win8
+            "3088195",
+            "3093983",
+            "3093513",
+            "3042058",
+            "3083710",
+            "3050265", //Windows update, get win 10.
+            "3112336" //https://support.microsoft.com/en-us/kb/3112336 - issue #213
+        };
+
         private void DeleteUpdatesWin78()
         {
-            string[] updatesnumberlist =
+            for (var i = 0; i < checkedListBoxUpdatesW78.Items.Count; i++)
             {
-                "3080149",
-                "3075249",
-                "3068708",
-                "3044374",
-                "3035583",
-                "3022345",
-                "3021917",
-                "3015249",
-                "3012973",
-                "2990214",
-                "2977759",
-                "2976978",
-                "2952664",
-                "2922324",
-                "971033",
-                "3083324", //win7
-                "3083325", //win8
-                "3088195",
-                "3093983",
-                "3093513",
-                "3042058",
-                "3083710",
-                "3050265"  //Windows update, get win 10.
-            };
-            foreach (var updateNumber in updatesnumberlist)
-            {
+                if (!checkedListBoxUpdatesW78.GetItemChecked(i)) continue;
+                var updateNumber = Convert.ToInt32(checkedListBoxUpdatesW78.Items[i].ToString().Replace("KB", null));
                 RunCmd(string.Format("/c start /wait wusa /uninstall /norestart /quiet /kb:{0}", updateNumber));
-                _OutPut(string.Format("Remove update KB{0}", updateNumber));
+                _OutPut(string.Format("Remove and Hide update KB{0}", updateNumber));
             }
         }
+
 
         private void BlockIpAddr()
         {
@@ -1411,18 +1454,32 @@ namespace DWS_Lite
                 "104.96.147.3",
                 "23.57.107.27",
                 "23.57.107.163",
-                "23.57.101.163"
+                "23.57.101.163",
+                "2.22.61.43",
+                "2.22.61.66",
+                "65.39.117.230",
+                "23.218.212.69",
+                "134.170.30.202",
+                "137.116.81.24",
+                "157.56.106.189",
+                "204.79.197.200",
+                "65.52.108.33"
             };
             foreach (var currentIpAddr in ipAddr)
             {
                 RunCmd(string.Format("/c route -p ADD {0} MASK 255.255.255.255 0.0.0.0", currentIpAddr));
                 RunCmd(string.Format("/c netsh advfirewall firewall delete rule name=\"{0}_Block\"", currentIpAddr));
-                RunCmd(string.Format("/c netsh advfirewall firewall add rule name=\"{0}_Block\" dir=out interface=any action=block remoteip={0}", currentIpAddr));
+                RunCmd(
+                    string.Format(
+                        "/c netsh advfirewall firewall add rule name=\"{0}_Block\" dir=out interface=any action=block remoteip={0}",
+                        currentIpAddr));
                 _OutPut(string.Format("Add Windows Firewall rule: \"{0}_Block\"", currentIpAddr));
             }
             RunCmd("/c netsh advfirewall firewall delete rule name=\"Explorer.EXE_BLOCK\"");
             RunCmd(
-                string.Format("/c netsh advfirewall firewall add rule name=\"Explorer.EXE_BLOCK\" dir=out interface=any action=block program=\"{0}Windows\\explorer.exe\"", _systemPath));
+                string.Format(
+                    "/c netsh advfirewall firewall add rule name=\"Explorer.EXE_BLOCK\" dir=out interface=any action=block program=\"{0}Windows\\explorer.exe\"",
+                    _systemPath));
             RunCmd("/c netsh advfirewall firewall delete rule name=\"WSearch_Block\"");
             RunCmd(
                 "/c netsh advfirewall firewall add rule name=\"WSearch_Block\" dir=out interface=any action=block service=WSearch");
@@ -1471,8 +1528,8 @@ Are you sure?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == 
                     }
 
                     RunCmd("/c TASKKILL /F /IM msosync.exe");
-                    RunCmd(string.Format("/c takeown /f \"{0}\" /d y",officePath));
-                    RunCmd(string.Format("/c icacls \"{0}\" /grant {1}:F /q",officePath,userName));
+                    RunCmd(string.Format("/c takeown /f \"{0}\" /d y", officePath));
+                    RunCmd(string.Format("/c icacls \"{0}\" /grant {1}:F /q", officePath, userName));
                     var fileOffice = File.ReadAllBytes(officePath);
                     fileOffice = StringToByteArray(ByteArrayToString(fileOffice).Replace("68747470", "78747470"));
                     // find "http" and replace to "xttp".
@@ -1529,36 +1586,54 @@ Are you sure?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == 
 
         private void CloseButton_MouseEnter(object sender, EventArgs e)
         {
-            _CloseButton.BackColor = Color.WhiteSmoke;
+            _closeButtonState = 2;
+            _CloseButton.Refresh();
+            _CloseButton.BackColor = Color.Azure;
         }
 
         private void CloseButton_MouseLeave(object sender, EventArgs e)
         {
+            _closeButtonState = 0;
+            _CloseButton.Refresh();
             _CloseButton.BackColor = Color.White;
         }
 
         private void MinimizeButton_MouseEnter(object sender, EventArgs e)
         {
-            MinimizeButton.BackColor = Color.WhiteSmoke;
+            _minimizeButtonState = 2;
+            MinimizeButton.Refresh();
+            MinimizeButton.BackColor = Color.Azure;
         }
 
         private void MinimizeButton_MouseLeave(object sender, EventArgs e)
         {
+            _minimizeButtonState = 0;
+            MinimizeButton.Refresh();
             MinimizeButton.BackColor = Color.White;
         }
 
         private void MinimizeButton_Paint(object sender, PaintEventArgs e)
         {
-            var g = e.Graphics;
-            g.DrawImage(Resources.minimize, MinimizeButton.Width - Resources.minimize.Width - 5,
+            var myCurrentPaint = _minimizeButtonState == 0
+                ? Resources.minimize
+                : _minimizeButtonState == 1 ? Resources.minimize1 : Resources.minimize2;
+            e.Graphics.DrawImage(myCurrentPaint, MinimizeButton.Width - Resources.minimize.Width - 5,
                 MinimizeButton.Height - Resources.minimize.Height - 7);
         }
 
         private void CloseButton_Paint(object sender, PaintEventArgs e)
         {
-            var g = e.Graphics;
-            g.DrawImage(Resources.close, _CloseButton.Width - Resources.close.Width - 5,
+            var myCurrentPaint = _closeButtonState == 0
+                ? Resources.close
+                : _closeButtonState == 1 ? Resources.close1 : Resources.close2;
+            e.Graphics.DrawImage(myCurrentPaint, _CloseButton.Width - Resources.close.Width - 5,
                 _CloseButton.Height - Resources.close.Height - 7);
+        }
+
+        private void CaptionWindow_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.FillEllipse(new SolidBrush(Color.WhiteSmoke), 3,3,23,23);
+            e.Graphics.DrawImage(Icon.ToBitmap(), 6, 5, 19, 19);
         }
 
         private void ChangeBorderColor(Color cl)
@@ -1602,14 +1677,21 @@ Are you sure?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == 
             }
         }
 
+        private int _closeButtonState;
+        private int _minimizeButtonState;
+
         private void CloseButton_MouseDown(object sender, MouseEventArgs e)
         {
-            _CloseButton.BackColor = Color.LightGray;
+            _closeButtonState = 1;
+            _CloseButton.Refresh();
+            _CloseButton.BackColor = Color.FromArgb(255, 0, 0);
         }
 
         private void MinimizeButton_MouseDown(object sender, MouseEventArgs e)
         {
-            MinimizeButton.BackColor = Color.LightGray;
+            _minimizeButtonState = 1;
+            MinimizeButton.Refresh();
+            MinimizeButton.BackColor = Color.CornflowerBlue;
         }
 
         private void SecretButton_Click(object sender, EventArgs e)
@@ -1676,7 +1758,7 @@ Are you sure?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == 
             }
             else if (currentlang.IndexOf("it", StringComparison.Ordinal) > -1)
             {
-                _rm = it_CH.ResourceManager;
+                _rm = it_IT.ResourceManager;
                 comboBoxLanguageSelect.Text = @"it-CH | Italian";
             }
             else if (currentlang.IndexOf("cs", StringComparison.Ordinal) > -1)
@@ -1742,11 +1824,13 @@ Are you sure?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == 
             checkBoxDisablePrivateSettings.Text = GetTranslateText("checkBoxDisablePrivateSettings");
             checkBoxDisableWindowsDefender.Text = GetTranslateText("checkBoxDisableWindowsDefender");
             checkBoxKeyLoggerAndTelemetry.Text = GetTranslateText("checkBoxKeyLoggerAndTelemetry");
+            checkBoxDelKeyloggerTW78.Text = GetTranslateText("checkBoxKeyLoggerAndTelemetry");
             checkBoxSetDefaultPhoto.Text = GetTranslateText("checkBoxSetDefaultPhoto");
             checkBoxSPYTasks.Text = GetTranslateText("checkBoxSPYTasks");
             checkBoxSPYTasks78.Text = GetTranslateText("checkBoxSPYTasks");
             checkBoxDeleteWindows78Updates.Text = GetTranslateText("checkBoxDeleteWindows78Updates");
             checkBoxDeleteGWX.Text = GetTranslateText("checkBoxDeleteGWX");
+            labelUninstallUpdates.Text = GetTranslateText("labelUninstallUpdates");
             labelInfoDeleteMetroApps.Text = GetTranslateText("labelInfoDeleteMetroApps");
             btnEnableUac.Text = string.Format("{0} UAC", GetTranslateText("Enable"));
             btnDisableUac.Text = string.Format("{0} UAC", GetTranslateText("Disable"));
@@ -1896,7 +1980,8 @@ Are you sure?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == 
             var registryKey = Registry.CurrentUser.CreateSubKey(regkeyfolder);
             if (registryKey != null)
                 registryKey.Close();
-            var myKey = Registry.CurrentUser.OpenSubKey(regkeyfolder, RegistryKeyPermissionCheck.ReadWriteSubTree, RegistryRights.FullControl);
+            var myKey = Registry.CurrentUser.OpenSubKey(regkeyfolder, RegistryKeyPermissionCheck.ReadWriteSubTree,
+                RegistryRights.FullControl);
             try
             {
                 if (myKey != null)
@@ -1938,5 +2023,20 @@ Are you sure?", @"Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == 
         }
 
         #endregion
+
+        private void checkBoxDeleteWindows78Updates_CheckedChanged(object sender, EventArgs e)
+        {
+            checkedListBoxUpdatesW78.Enabled = checkBoxDeleteWindows78Updates.Checked;
+        }
+
+        private void DestroyWindowsSpyingMainForm_Activated(object sender, EventArgs e)
+        {
+            CaptionWindow.ForeColor = Color.FromArgb(64, 64, 64);
+        }
+
+        private void DestroyWindowsSpyingMainForm_Deactivate(object sender, EventArgs e)
+        {
+            CaptionWindow.ForeColor = Color.FromArgb(164, 164, 164);
+        }
     }
 }

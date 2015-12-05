@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace DWS_Lite.lang {
+    
     using System;
     
     
@@ -397,6 +398,35 @@ namespace DWS_Lite.lang {
         internal static string tabPageUtilites {
             get {
                 return ResourceManager.GetString("tabPageUtilites", resourceCulture);
+            }
+        }
+        
+		/// <summary>
+		///   Looks up a localized string similar to Delete GWX.
+		/// </summary>
+		internal static string checkBoxDeleteGWX {
+			get {
+				return ResourceManager.GetString("checkBoxDeleteGWX", resourceCulture);
+
+			}
+		}
+
+
+		/// <summary>
+		///   Looks up a localized string similar to Delete spying updates..
+		/// </summary>
+		internal static string checkBoxDeleteWindows78Updates {
+			get {
+				return ResourceManager.GetString("checkBoxDeleteWindows78Updates", resourceCulture);
+			}
+		}
+	
+        /// <summary>
+        ///   Looks up a localized string similar to Uninstall updates:.
+ 	/// </summary>
+        internal static string labelUninstallUpdates {
+            get {
+                return ResourceManager.GetString("labelUninstallUpdates", resourceCulture);
             }
         }
         
